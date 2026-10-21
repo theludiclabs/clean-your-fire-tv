@@ -35,5 +35,3 @@ under the SIL Open Font License.
 The launcher reads an installed app's Android TV banner or launcher icon at runtime. App icons and service logos
 are not copied into this repository; their appearance and trademarks belong to their respective publishers.
 
-No Flaticon downloads are included. Flaticon's licensing is separate from this repository's MIT license and
-its terms restrict redistribution of its content. See [Flaticon's terms](https://www.flaticon.com/legal/).

@@ -92,7 +92,7 @@ If ADB reports `No route to host` on macOS even though the TV is reachable, chec
 
 The launcher reads the banner or icon offered by each app installed on the TV. This keeps the artwork matched to the installed app without bundling third-party logos. An Apple TV app icon appears only if a compatible app is installed and pinned.
 
-Flaticon search results can help identify artwork, but Flaticon content is not bundled because its terms restrict redistribution. See [Flaticon's license terms](https://www.flaticon.com/legal/). The launcher source is MIT licensed; bundled images and fonts keep their own terms, listed in [CREDITS.md](CREDITS.md), [FONT-LICENSE-OFL.txt](FONT-LICENSE-OFL.txt), and the notices in `launcher/`.
+For additional artwork, use official assets supplied by the app publisher or artwork already provided by the installed TV app. The launcher source is MIT licensed; bundled images and fonts keep their own terms, listed in [CREDITS.md](CREDITS.md), [FONT-LICENSE-OFL.txt](FONT-LICENSE-OFL.txt), and the notices in `launcher/`.
 
 ## License
 
