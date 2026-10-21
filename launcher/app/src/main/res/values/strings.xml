@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Clean Home</string>
+    <string name="inputs">Inputs</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="settings">Settings</string>
+    <string name="navigation">MENU</string>
+    <string name="home">Home</string>
+    <string name="all_apps">All apps</string>
+    <string name="wallpaper">Wallpaper</string>
+    <string name="channels">YOUR CHANNELS</string>
+    <string name="dock_hint">Press Down to browse all apps</string>
+    <string name="press_ok_to_open">Press OK to open</string>
+    <string name="wallpaper_dynamic">Dynamic wallpaper</string>
+    <string name="wallpaper_black">Black wallpaper</string>
+    <string name="wallpaper_morning">Morning wallpaper</string>
+    <string name="wallpaper_afternoon">Afternoon wallpaper</string>
+    <string name="wallpaper_evening">Evening wallpaper</string>
+    <string name="wallpaper_night">Night wallpaper</string>
+    <string name="choose_input">Inputs</string>
+    <string name="connected">Connected</string>
+    <string name="standby">Standby</string>
+    <string name="not_connected">No device</string>
+    <string name="live_tv">Live TV</string>
+    <string name="no_inputs">No inputs found</string>
+    <string name="no_inputs_on_stick">No HDMI or AV inputs found on this device</string>
+    <string name="good_morning">Good morning</string>
+    <string name="good_afternoon">Good afternoon</string>
+    <string name="good_evening">Good evening</string>
+    <string name="good_night">Good night</string>
+    <string name="ethernet">Ethernet</string>
+    <string name="offline">Offline</string>
+    <string name="no_internet">No internet</string>
+    <string name="screensaver_label">Manhattan</string>
+    <string name="pin_to_dock">Pin to Dock</string>
+    <string name="unpin_from_dock">Unpin from Dock</string>
+    <string name="move_left">Move Left</string>
+    <string name="move_right">Move Right</string>
+    <string name="app_info">App Info</string>
+    <string name="dock_full">Dock is full. Unpin an app first.</string>
+</resources>
