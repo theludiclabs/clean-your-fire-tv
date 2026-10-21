@@ -111,7 +111,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.Holder> {
             if (mainComponent != null && !mainComponent.getClassName().equals(ri.activityInfo.name)) continue;
             if (!seen.add(pkg)) continue;
             Drawable icon = ri.loadIcon(pm);
-            Drawable banner = ri.loadBanner(pm);
+            Drawable banner = ri.activityInfo.loadBanner(pm);
             String label = String.valueOf(ri.loadLabel(pm));
             fresh.add(new Entry(label, new ComponentName(pkg, ri.activityInfo.name), banner, icon));
         }
