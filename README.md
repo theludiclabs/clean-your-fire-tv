@@ -1,103 +1,99 @@
 # Clean your Fire TV
 
-A small, native Android TV launcher for a calmer Fire TV home screen. It trades Amazon's promoted rows for a quiet, Apple TV inspired layout with large app artwork, a four app dock, a scrollable app grid, a clock, Wi-Fi name, and scenic wallpapers.
+[![Build](https://github.com/theludiclabs/clean-your-fire-tv/actions/workflows/android.yml/badge.svg)](https://github.com/theludiclabs/clean-your-fire-tv/actions/workflows/android.yml)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-![Recent Clean Home screenshot from Fire TV](screenshots/clean-home-after.png)
+A small, native launcher that gives compatible Fire TV devices a calmer home screen: large app artwork, a dock, scenic wallpapers, and an app grid. It is inspired by Apple TV's clean presentation, while remaining an independent project.
 
-The Wi-Fi name is masked in this public screenshot. The displayed dock artwork is from the recent on-device capture; the packaged source now reads app artwork from installed apps at runtime.
+![Clean Home running on Fire TV](screenshots/clean-home-after.png)
 
-## What it does
+*Recent on-device screenshot. The Wi-Fi name is masked. App artwork is read from installed apps at runtime.*
 
-- Replaces the busy launcher presentation with a clean home screen, a dock, and an app grid, hiding promoted rows while Clean Home is open.
-- Uses the banner or icon provided by each installed TV app at runtime. App artwork is not copied into this repository.
-- Includes four similar mountain and lake wallpapers for morning, afternoon, evening, and night, plus a wallpaper picker and a black option.
-- Keeps the interface light: static images, no video, no blur, and no background network polling.
-- Lets you pin, remove, and reorder dock apps with the remote.
-- Offers Inputs, Wi-Fi, and Settings shortcuts where the TV exposes the matching system feature.
-- Reduces visible clutter and can be paired with selective package disabling on firmware that permits it.
+## What you get
 
-The Apple TV comparison describes the visual inspiration. This project is an independent launcher and does not include Apple TV software or content.
+- **A quieter home screen:** Clean Home replaces the promotional layout while it is open.
+- **Large app artwork:** The launcher uses artwork supplied by installed apps, with an app icon fallback.
+- **A personal dock:** Pin, remove, and reorder apps with the remote.
+- **A scenic backdrop:** Four coordinated mountain and lake wallpapers for morning, afternoon, evening, and night, plus a black option and a dynamic picker.
+- **TV-friendly controls:** D-pad navigation, app grid, and shortcuts for Inputs, Wi-Fi, and Settings where Fire OS exposes them.
+- **A lightweight interface:** Static images, no video playback, no blur effects, and no background network polling.
+- **Reversible cleanup:** Where Fire OS permits package disabling, reviewed apps can be disabled without uninstalling system packages and re-enabled later.
 
-## Fire TV limitations
+## Important: Fire TV still runs Fire OS
 
-Clean your Fire TV is a launcher app. It does **not** replace or remove Fire OS, root the TV, or uninstall system packages.
+This project installs a **launcher app**. It does not replace, remove, or unlock Fire OS, and it does not root the TV. Amazon controls whether a third-party launcher can become the Home-button destination and which packages can be disabled.
 
-Amazon controls which apps can become the default Home screen and which preloaded packages can be disabled. On the tested Fire TV Stick (AFTT, Fire OS 5.2.8.4), Fire OS rejected attempts to disable manufacturer packages, and the Home button continued to open Amazon Home. No packages were disabled on that device. Other models and software versions may allow more, less, or different behavior.
+On the Fire TV Stick tested for this project (AFTT, Fire OS 5.2.8.4), Fire OS rejected attempts to disable manufacturer packages, and the remote's Home button continued to open Amazon Home. Clean Home can still be opened from **Your Apps & Channels** or with the included ADB helper. Other models and software versions may behave differently.
 
-On devices that allow it, you can disable selected unwanted packages with Android's `pm disable-user` command after reviewing them. This project never removes system packages. Do not disable streaming apps, voice control, casting, or system updates unless you know you do not need them.
+No package is uninstalled by this project. Do not disable streaming apps or services you use, voice control, casting, or system updates unless you have reviewed the package and chosen to keep that feature unavailable. Back up your device state first.
 
-Disable only one reviewed package at a time:
+### Open Clean Home again
 
-```bash
-adb -s TV_IP:5555 shell pm disable-user --user 0 PACKAGE_NAME
-```
-
-To re-enable that package later:
-
-```bash
-adb -s TV_IP:5555 shell pm enable --user 0 PACKAGE_NAME
-```
-
-### Open Clean Home again after Amazon Home opens
-
-On the tested Fire OS 5 device:
-
-1. Open **Your Apps & Channels** from Amazon Home.
-2. Select **Clean Home**.
-
-Or connect ADB and run `./open-clean-home.sh TV_IP` from this folder. The Home button itself returns to Amazon Home on this Fire OS version.
-
-If a future Fire OS update exposes a **Default Home app** setting, choose **Clean Home** there. If the Home button opens a chooser, choose **Clean Home** and select **Always**. Those options are not available on the tested Fire OS 5 build.
-
-## Install
-
-### 1. Prepare the TV
-
-1. On the TV, open **Settings → My Fire TV → Developer Options** and enable **ADB Debugging**. On newer versions, first enable Developer Options by selecting **About → Fire TV Stick** several times.
-2. Make sure your computer and TV are on the same network.
-3. Find the TV's IP address under **Settings → My Fire TV → About → Network**.
-4. Install Android Platform Tools (`adb`) and Java 17 on your computer.
-
-### 2. Build and install
-
-Clone this repository, open a terminal in its folder, and run:
-
-```bash
-./build-and-install.sh TV_IP
-```
-
-For example:
-
-```bash
-./build-and-install.sh 192.168.1.42
-```
-
-The script builds the debug APK, connects to the TV over ADB, installs Clean Home, and opens it. The first connection may show an **Allow USB debugging?** prompt on the TV; accept it. The script does not need root.
-
-Requirements: Java 17, Android SDK Platform 34, Android Build Tools, and `adb` on your PATH. The Gradle wrapper downloads its pinned Gradle version and dependencies as needed.
-
-### Return to Clean Home
-
-If Amazon Home appears, use **Your Apps & Channels → Clean Home**, or run:
+If the Home button returns to Amazon Home, open **Your Apps & Channels → Clean Home**. Or connect over ADB and run:
 
 ```bash
 ./open-clean-home.sh TV_IP
 ```
 
-## Dock and wallpapers
+If a future Fire OS version exposes a **Default Home app** setting or a Home-app chooser, select Clean Home there. That option is absent on the tested Fire OS 5 build.
 
-- **Dock order:** on a tile, press Menu or hold OK; choose Pin, Unpin, Move Left, or Move Right. The default packages are listed in `launcher/app/src/main/res/values/config.xml`. Missing apps are skipped; available Leanback apps are discovered from the TV.
-- **Wallpaper:** focus Settings and press Menu or hold OK. Select Dynamic, Black, Morning, Afternoon, Evening, or Night. Dynamic follows the TV's clock and changes between the four included mountain and lake images. Replace the matching `bg_*.jpg` files in `launcher/app/src/main/res/drawable-nodpi/` to use your own images; keep the same filenames and rebuild.
-- **More wallpapers:** the four bundled backgrounds use a consistent mountain and lake theme at different times of day. Their sources and usage terms are documented in [CREDITS.md](CREDITS.md). You can add your own images by replacing those files.
+## Install
 
-## App icons and licensing
+### Requirements
 
-The dock shows the artwork supplied by each installed app through Android's package manager, falling back to that app's launcher icon when it does not provide a TV banner. This keeps icons faithful to the installed apps without copying their logos into the repository. An Apple TV icon will only appear if a compatible Apple TV app is installed and pinned; it was not available on the tested device.
+- A Fire TV on the same network as your computer
+- ADB debugging enabled in **Settings → My Fire TV → Developer Options** (on newer models, enable Developer Options by selecting the device name in **About** several times)
+- Android Platform Tools (`adb`) and Java 17 available in your terminal
+- Android SDK Platform 34 and Build Tools; the Gradle wrapper downloads its pinned Gradle version and dependencies
 
-Flaticon offers useful app-logo icons, but its terms restrict redistribution of its content. To keep this repository usable under MIT, no Flaticon downloads are bundled. See [Flaticon's license terms](https://www.flaticon.com/legal/).
+### Steps
+
+1. Find the TV's IP in **Settings → My Fire TV → About → Network**.
+2. Clone this repository and open a terminal in the project folder.
+3. Build the debug APK, install it, and open Clean Home:
+
+   ```bash
+   git clone https://github.com/theludiclabs/clean-your-fire-tv.git
+   cd clean-your-fire-tv
+   ./build-and-install.sh TV_IP
+   ```
+
+   For example: `./build-and-install.sh 192.168.1.42`
+4. Accept the **Allow USB debugging?** prompt on the TV when it appears.
+5. Open Clean Home from **Your Apps & Channels** if Fire OS returns to Amazon Home.
+
+The Android build is only the native launcher APK. GitHub Actions compiles it and makes a debug APK available as a workflow artifact; it does not build a replacement Fire OS image.
+
+### Connection troubleshooting
+
+If ADB reports `No route to host` on macOS even though the TV is reachable, check macOS **System Settings → Privacy & Security → Local Network** and allow the terminal app to access the network. If macOS Local Network privacy blocks the stock ADB connection, the [Python `adb-shell` package](https://github.com/JeffLIrion/adb_shell) can be used as an alternative ADB client. This project's install script uses the `adb` command line tool and does not set up that alternative automatically.
+
+## Customize
+
+- **Dock:** Focus an app and press Menu or hold OK to pin/unpin it or move it left/right. The default app list is in `launcher/app/src/main/res/values/config.xml`.
+- **Wallpaper:** Focus Settings and press Menu or hold OK. Choose Dynamic, Black, Morning, Afternoon, Evening, or Night. Dynamic selects from the four included scenic wallpapers based on the TV clock.
+- **Your own wallpaper:** Replace the corresponding `bg_*.jpg` images in `launcher/app/src/main/res/drawable-nodpi/`, preserving filenames, then rebuild. Wallpaper sources and terms are in [CREDITS.md](CREDITS.md).
+- **Re-enable a package:** If you disabled a package yourself, run `adb -s TV_IP:5555 shell pm enable --user 0 PACKAGE_NAME`.
+
+## Repository guide
+
+| Path | Purpose |
+| --- | --- |
+| `launcher/` | Native Android TV launcher source and Gradle build |
+| `build-and-install.sh` | Build, connect, install, and open the launcher |
+| `open-clean-home.sh` | Reopen Clean Home over ADB |
+| `uninstall.sh` | Remove the launcher app (does not restore disabled packages) |
+| `screenshots/` | Public, privacy-masked on-device screenshot |
+| `CREDITS.md` | Wallpaper and other asset attributions |
+| `PROMPT.md` | Reusable, safety-first checklist for an assistant-guided setup |
+| `.github/workflows/android.yml` | Builds the debug APK on pushes and pull requests |
+
+## Artwork and licensing
+
+The launcher reads the banner or icon offered by each app installed on the TV. This keeps the artwork matched to the installed app without bundling third-party logos. An Apple TV app icon appears only if a compatible app is installed and pinned.
+
+Flaticon search results can help identify artwork, but Flaticon content is not bundled because its terms restrict redistribution. See [Flaticon's license terms](https://www.flaticon.com/legal/). The launcher source is MIT licensed; bundled images and fonts keep their own terms, listed in [CREDITS.md](CREDITS.md), [FONT-LICENSE-OFL.txt](FONT-LICENSE-OFL.txt), and the notices in `launcher/`.
 
 ## License
 
-The launcher source code is available under the MIT License. Bundled photos and fonts retain their own licenses; see [CREDITS.md](CREDITS.md), [FONT-LICENSE-OFL.txt](FONT-LICENSE-OFL.txt), and the license notices in `launcher/`.
-
-Streaming service and device names are trademarks of their respective owners.
+Source code: [MIT](LICENSE). Brand and service names belong to their respective owners. This independent project is not affiliated with Amazon or Apple.
