@@ -2,7 +2,7 @@
 
 ## CleanYourTV launcher source
 
-The optional launcher in `launcher/` is adapted from [Gathin23/CleanYourTV](https://github.com/Gathin23/cleanyourtv), Copyright (c) 2026 Gathin, and is distributed under the MIT License. The MIT permission notice and copyright are retained in the root [`LICENSE`](LICENSE). The Android package ID and Java package were changed to `com.theludiclabs.cleanhome`; the upstream package ID was `com.gathin.tvhome`.
+The optional launcher in `launcher/` is inspired by and adapted from [Gathin23/CleanYourTV](https://github.com/Gathin23/cleanyourtv), Copyright (c) 2026 Gathin, and is distributed under the MIT License. The MIT permission notice and copyright are retained in the root [`LICENSE`](LICENSE). The Android package ID and Java package were changed to `com.theludiclabs.cleanhome`; the upstream package ID was `com.gathin.tvhome`.
 
 This repository is an independently created project with source adapted from that project. It is not a GitHub fork, and the maintainers are not affiliated with Gathin or the upstream project.
 
@@ -11,11 +11,8 @@ This repository is an independently created project with source adapted from tha
 The optional launcher uses these AndroidX libraries, distributed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0):
 
 - `androidx.recyclerview:recyclerview:1.3.2`
-- `androidx.dynamicanimation:dynamicanimation:1.0.0`
 
-## Fonts
-
-Outfit and Open Sans are distributed under the SIL Open Font License 1.1. See [`FONT-LICENSE-OFL.txt`](FONT-LICENSE-OFL.txt) and [`launcher/FONT-LICENSE-OFL.txt`](launcher/FONT-LICENSE-OFL.txt).
+The launcher uses the Android system sans-serif typefaces and native view animation APIs rather than bundling fonts or using an external animation library.
 
 ## Photos
 

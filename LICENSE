@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 The LudiClabs contributors
+Copyright (c) 2026 The LudicLabs contributors
 Copyright (c) 2026 Gathin (adapted launcher portions)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,9 +20,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-The Outfit typeface in launcher/app/src/main/res/font/outfit.ttf is copyright
-The Outfit Project Authors and licensed under the SIL Open Font License 1.1,
-see launcher/FONT-LICENSE-OFL.txt.

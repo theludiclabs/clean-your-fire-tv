@@ -2,6 +2,8 @@
 
 A **prompt-first** guide for reviewing and cleaning up a Fire TV safely. Start with [`PROMPT.md`](PROMPT.md), give it and this repository to an assistant that can access your computer and TV over ADB, and follow the TV-specific checklist. The launcher source is an optional companion for devices where sideloaded home screens are useful.
 
+**Design and code credit:** This project was inspired by and its optional launcher is adapted from [Gathin23/CleanYourTV](https://github.com/Gathin23/cleanyourtv). Gathin's MIT copyright and permission notice are preserved in [`LICENSE`](LICENSE); see [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for details. This repository is independently maintained and is not affiliated with the upstream project.
+
 ![Clean Home running on Fire TV](screenshots/clean-home-after.png)
 
 *On-device interface example. This screenshot shows artwork from streaming apps installed on the pictured TV; that artwork is not included in the launcher package and remains the property of its publishers. The Wi-Fi name is masked.*
@@ -36,7 +38,7 @@ If ADB reports `No route to host` on macOS even though the TV is reachable, macO
 
 The launcher is optional and is not required to run the cleanup prompt. It provides a black, Apple TV inspired home screen with large app artwork, a dock, an app grid, and scenic wallpapers. Fire OS may still open Amazon Home when you press Home; on the tested Fire OS 5 build, use **Your Apps & Channels → Clean Home** or the ADB helper below.
 
-The launcher is adapted from [Gathin23/CleanYourTV](https://github.com/Gathin23/cleanyourtv), which is MIT licensed. This repository was created independently, so GitHub will not label it as a fork. The source attribution and original MIT notice are retained in [`LICENSE`](LICENSE). We changed the Android package ID to `com.theludiclabs.cleanhome` to give this build its own identity.
+The launcher source is adapted from [Gathin23/CleanYourTV](https://github.com/Gathin23/cleanyourtv), which is MIT licensed. This repository was created independently, so GitHub will not label it as a fork. The source attribution and original MIT notice are retained in [`LICENSE`](LICENSE). We changed the Android package ID to `com.theludiclabs.cleanhome` to give this build its own identity.
 
 To build and install the optional launcher, install Android Platform Tools, Java 17, Android SDK Platform 34, and Android Build Tools, then run:
 
@@ -89,4 +91,4 @@ This does not re-enable any packages disabled during cleanup. Use the restore sc
 
 ## License
 
-Project source is available under the MIT License. Bundled fonts, photos, AndroidX components, and adapted upstream launcher code retain their own licenses and notices; see [`LICENSE`](LICENSE), [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md), and [`CREDITS.md`](CREDITS.md).
+Project source is available under the MIT License. The launcher uses Android's built-in sans-serif fonts instead of bundling font files. Photos, AndroidX RecyclerView, and adapted upstream launcher code retain their own licenses and notices; see [`LICENSE`](LICENSE), [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md), and [`CREDITS.md`](CREDITS.md).

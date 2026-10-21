@@ -113,7 +113,7 @@ public class PhotoDream extends DreamService {
         c.setFormat24Hour("HH:mm");
         c.setTextColor(0xE6FFFFFF);
         c.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
-        c.setTypeface(Typeface.createFromAsset(getAssets(), "outfit.ttf"));
+        c.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
         c.setShadowLayer(12f, 0f, 2f, 0x99000000);
         float dp = getResources().getDisplayMetrics().density;
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,

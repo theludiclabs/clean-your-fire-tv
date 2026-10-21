@@ -7,7 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
@@ -34,6 +33,7 @@ import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LayoutAnimationController;
+import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,9 +42,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.dynamicanimation.animation.DynamicAnimation;
-import androidx.dynamicanimation.animation.SpringAnimation;
-import androidx.dynamicanimation.animation.SpringForce;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,7 +51,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * tvOS style home: black, a pinned dock row, an app grid, and one glass highlight that springs between tiles.
+ * tvOS style home: black, a pinned dock row, an app grid, and one glass highlight that glides between tiles.
  */
 public class MainActivity extends Activity implements AppAdapter.TileListener {
 
@@ -86,7 +83,6 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private ImageView bgPhoto;
     private int bgRes;
     private TextView btnWifi;
-    private SpringAnimation springX, springY;
     private float glassTargetX, glassTargetY;
     private boolean glassShown;
     private int lastFocused = 0;
@@ -134,12 +130,6 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         bgPhoto = findViewById(R.id.bgPhoto);
         bgPhoto.setVisibility(View.GONE);
         btnWifi = findViewById(R.id.btnWifi);
-        Typeface outfit = Typeface.createFromAsset(getAssets(), "outfit.ttf");
-        for (int id : new int[]{R.id.greeting, R.id.clock, R.id.ampm, R.id.date,
-                R.id.heroName, R.id.btnInputs, R.id.btnWifi, R.id.btnSettings}) {
-            ((TextView) findViewById(id)).setTypeface(outfit);
-        }
-
         grid = findViewById(R.id.grid);
         // One span unit per cell of any dock size 1..COLUMNS: the dock row splits evenly, grid rows are COLUMNS wide.
         final int spans = lcmUpTo(COLUMNS);
@@ -176,17 +166,10 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             public void onScrolled(@NonNull RecyclerView rv, int dx, int dy) {
                 if (!glassShown) return;
                 glassTargetY -= dy;
-                if (springY.isRunning()) springY.animateToFinalPosition(glassTargetY);
-                else glass.setTranslationY(glassTargetY);
+                glass.animate().cancel();
+                glass.setTranslationY(glassTargetY);
             }
         });
-
-        // Liquid feel: soft springs on the highlight's position.
-        springX = new SpringAnimation(glass, DynamicAnimation.TRANSLATION_X);
-        springY = new SpringAnimation(glass, DynamicAnimation.TRANSLATION_Y);
-        for (SpringAnimation s : new SpringAnimation[]{springX, springY}) {
-            s.setSpring(new SpringForce().setStiffness(260f).setDampingRatio(0.58f));
-        }
 
         View btnInputs = findViewById(R.id.btnInputs);
         View btnSettings = findViewById(R.id.btnSettings);
@@ -308,15 +291,14 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         glassTargetX = x;
         glassTargetY = y;
         if (!glassShown) {
-            springX.cancel();
-            springY.cancel();
+            glass.animate().cancel();
             glass.setTranslationX(x);
             glass.setTranslationY(y);
             glass.animate().alpha(1f).setDuration(180).start();
             glassShown = true;
         } else {
-            springX.animateToFinalPosition(x);
-            springY.animateToFinalPosition(y);
+            glass.animate().translationX(x).translationY(y).setDuration(280)
+                    .setInterpolator(new OvershootInterpolator(0.7f)).start();
         }
         View item = (View) card.getParent();
         hideHero();

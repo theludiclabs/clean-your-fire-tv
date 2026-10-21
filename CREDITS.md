@@ -25,11 +25,6 @@ The screensaver photos are cropped to 1920×1080; the mountain backgrounds retai
 | `bg_evening.jpg` | Evening background | [Moraine Lake at sunset](https://unsplash.com/photos/moraine-lake-surrounded-by-mountains-T0UJEFWU7EE) | [Nick H](https://unsplash.com/photos/moraine-lake-surrounded-by-mountains-T0UJEFWU7EE) |
 | `bg_night.jpg` | Night background | [Mountains and stars by a lake](https://unsplash.com/photos/mountains-stars-and-lake-reflect-in-a-beautiful-nightscape-aCusqffy5sY) | [Zetong Li](https://unsplash.com/photos/mountains-stars-and-lake-reflect-in-a-beautiful-nightscape-aCusqffy5sY) |
 
-## Fonts
-
-[Outfit](https://fonts.google.com/specimen/Outfit) and [Open Sans](https://fonts.google.com/specimen/Open+Sans),
-under the SIL Open Font License.
-
 ## App artwork
 
 The launcher reads an installed app's Android TV banner or launcher icon at runtime. App icons and service logos
