@@ -1,4 +1,4 @@
-package com.gathin.tvhome;
+package com.theludiclabs.cleanhome;
 
 import android.graphics.Rect;
 import android.view.View;

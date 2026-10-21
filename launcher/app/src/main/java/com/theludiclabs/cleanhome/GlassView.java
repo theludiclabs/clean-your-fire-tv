@@ -1,4 +1,4 @@
-package com.gathin.tvhome;
+package com.theludiclabs.cleanhome;
 
 import android.content.Context;
 import android.graphics.Canvas;

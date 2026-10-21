@@ -3,17 +3,17 @@ plugins {
 }
 
 android {
-    namespace 'com.gathin.tvhome'
+    namespace 'com.theludiclabs.cleanhome'
     compileSdk 34
 
-    // Optional name for the greeting ("Good evening, Alex"): tvhome.userName=Alex in launcher/local.properties.
+    // Optional name for the greeting ("Good evening, Alex"): cleanhome.userName=Alex in launcher/local.properties.
     def localProps = new Properties()
     def localFile = rootProject.file('local.properties')
     if (localFile.exists()) localFile.withInputStream { localProps.load(it) }
 
     defaultConfig {
-        resValue 'string', 'user_name', localProps.getProperty('tvhome.userName', '')
-        applicationId 'com.gathin.tvhome'
+        resValue 'string', 'user_name', localProps.getProperty('cleanhome.userName', '')
+        applicationId 'com.theludiclabs.cleanhome'
         minSdk 22
         targetSdk 29
         versionCode 2

@@ -7,5 +7,5 @@ if [[ -z "$TV_IP" ]]; then
   exit 2
 fi
 adb connect "${TV_IP}:5555"
-adb -s "${TV_IP}:5555" uninstall com.gathin.tvhome
+adb -s "${TV_IP}:5555" uninstall com.theludiclabs.cleanhome
 echo "Clean Home removed. Press Home to return to the Amazon launcher."

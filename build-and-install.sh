@@ -16,4 +16,4 @@ fi
 "$ROOT/launcher/gradlew" -p "$ROOT/launcher" assembleDebug --console=plain
 adb connect "${TV_IP}:5555"
 adb -s "${TV_IP}:5555" install -r "$ROOT/launcher/app/build/outputs/apk/debug/app-debug.apk"
-adb -s "${TV_IP}:5555" shell am start -n com.gathin.tvhome/.MainActivity
+adb -s "${TV_IP}:5555" shell am start -n com.theludiclabs.cleanhome/.MainActivity

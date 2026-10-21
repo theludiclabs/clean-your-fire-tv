@@ -1,31 +1,48 @@
-# Assistant-guided setup prompt
+# Assistant-guided Fire TV setup
 
-Use this prompt with a coding assistant that has access to this repository, a terminal, and (if you want on-device verification) the TV over ADB. Replace the model placeholder before starting.
+Use this repository as context with a coding assistant that can access your computer's terminal. On-device work requires the TV to be reachable over ADB. Fill in the TV model before starting.
 
 ---
 
-I want to set up this Clean your Fire TV project on my real Fire TV. The TV model is: **[enter exact model]**. Read this repository's README and scripts before making changes. Work step by step, and verify any on-device change with a screenshot pulled from the TV when the required tools are available.
+I want to review and clean up my real Fire TV safely. The TV model is: **[enter exact model]**. Read this repository's README and this prompt before making changes. Work step by step, and verify device changes with screenshots pulled from the TV when the required tools are available.
 
-## Device access and consent
+This is a Fire TV cleanup workflow. Fire OS cannot be removed by this project, and a third-party launcher may not be allowed to take over the remote's Home button. Do not promise that Clean Home replaces Fire OS or becomes the default home screen.
 
-- Find the TV on my local network or ask me for its IP. Connect with ADB over TCP on port 5555.
+## Connect
+
+- Find the TV on my local network, or ask me for its IP address. Connect over ADB on port 5555.
 - Tell me when the **Allow USB debugging?** prompt will appear so I can accept it.
-- If stock `adb` on macOS returns `No route to host` even though the TV port is reachable, treat macOS Local Network privacy as a likely cause. Do not spend time debugging the ADB binary; use Python's `adb-shell` in a virtual environment as the ADB client instead. If a large push hangs, transfer base64 chunks through the shell and verify the MD5 checksum.
-- Before any cleanup, save the package list, disabled-package list, `getprop`, and settings to a dated backup folder. Create a restore script for every package you disable.
+- If stock `adb` on macOS returns `No route to host` even though the TV is reachable, treat macOS Local Network privacy as the likely cause. Use Python's `adb-shell` in a virtual environment as the ADB client instead of spending time debugging the ADB binary.
+- If pushing a large file hangs, transfer base64 chunks through the shell and verify the MD5 checksum.
 
-## Review before changing anything
+## Back up before changes
+
+Save the following to a dated backup folder before changing settings or packages:
+
+- Full installed package list and disabled-package list.
+- `getprop` output.
+- System, global, and secure settings lists, where the firmware permits reading them.
+- A restore script that re-enables every package you disable.
+
+Do not include Wi-Fi credentials or other secrets in public files, screenshots, or logs. Keep the backup local unless I explicitly ask to publish it.
+
+## Review package candidates
 
 - Inventory installed packages and classify them as manufacturer telemetry/analytics, manufacturer content and advertising, background utilities, preloaded apps, and streaming apps.
-- Do not uninstall system packages. Only use `pm disable-user --user 0` for packages we have reviewed.
-- Keep everything enabled unless I explicitly identify it for disabling. Ask me with a checklist before touching streaming apps, Alexa/voice assistant, casting/AirPlay/Miracast, or the update service. Ask what apps I use before proposing any app removal/disable list.
-- Run each `pm` command in its own shell call and verify its result. Never batch several package changes into one command.
-- Fire TV firmware may refuse package disabling. If a command fails, report the exact limitation and leave the package enabled.
+- Explain what each candidate appears to do and whether disabling it could affect device features.
+- Never uninstall system packages. Use `pm disable-user --user 0` only for individual packages I approve.
+- Keep everything enabled unless I explicitly identify it for disabling. Before touching streaming apps, Alexa or other voice control, casting/AirPlay/Miracast, or the update service, ask me with a checklist and disable only items I explicitly choose.
+- Run each `pm` command in its own shell call and verify its result. Do not chain multiple package changes.
+- Fire OS firmware may reject package disabling. If a command fails, report the exact limitation and leave the package enabled.
 
-## Install and verify Clean Home
+## Optional launcher
 
-- Build and install the native launcher using the repository's `build-and-install.sh` script. Do not install unrelated launchers.
-- Fire TV may not allow a third-party default launcher. Do not claim Fire OS has been replaced. If Home still opens Amazon Home, explain how to open Clean Home through **Your Apps & Channels** or `open-clean-home.sh TV_IP`.
-- After installation, open Clean Home, send remote D-pad input over ADB where supported, and capture a screenshot from the TV. Inspect the screenshot before calling the setup complete.
-- Do not modify the user's dock order, wallpaper, greeting, or disable list without asking about those preferences first.
+Do not build or install the optional Clean Home launcher unless I choose it. If I do choose it:
 
-At the end, summarize what worked, what Fire OS blocked, where the backup and restore script are, and how to return to Clean Home.
+- Read the README and use the repository's `build-and-install.sh` script.
+- Explain that it is an app, not a replacement OS, and Fire TV may continue opening Amazon Home when I press Home.
+- Do not set it as the default Home app unless the TV exposes a supported setting and I choose that option.
+- On Fire OS versions that do not support a third-party default launcher, explain how to open Clean Home from **Your Apps & Channels** or `open-clean-home.sh TV_IP`.
+- After installation, send remote D-pad input over ADB where supported, capture a screenshot from the TV, and inspect it before calling the install complete.
+
+Ask about preferences before changing the dock order, wallpaper, greeting, or package disable list. At the end, tell me what worked, what Fire OS blocked, where the backup and restore script are, and how to re-enable a package.

@@ -7,4 +7,4 @@ if [[ -z "$TV_IP" ]]; then
   exit 2
 fi
 adb connect "${TV_IP}:5555"
-adb -s "${TV_IP}:5555" shell am start -n com.gathin.tvhome/.MainActivity
+adb -s "${TV_IP}:5555" shell am start -n com.theludiclabs.cleanhome/.MainActivity

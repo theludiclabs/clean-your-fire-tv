@@ -1,4 +1,4 @@
-package com.gathin.tvhome;
+package com.theludiclabs.cleanhome;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -74,7 +74,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.Holder> {
 
     private final Context ctx;
     private final TileListener listener;
-    private static final String PREFS = "tvhome";
+    private static final String PREFS = "cleanhome";
     private static final String PREF_DOCK = "dock";
     private final int maxDock;
     private int dockCount;

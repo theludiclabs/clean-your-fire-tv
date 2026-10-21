@@ -1,4 +1,4 @@
-package com.gathin.tvhome;
+package com.theludiclabs.cleanhome;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -61,7 +61,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     /** Tiles per row and dock slots (res/values/config.xml, columns). Set in onCreate. */
     static int COLUMNS = 4;
     private static final long MINUTE_MS = 60_000L;
-    private static final String PREFS = "tvhome";
+    private static final String PREFS = "cleanhome";
     private static final String PREF_WALLPAPER = "wallpaper";
     private String liveTvPkg;
 
@@ -239,7 +239,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         ambient.setAlpha(0f);
         gridScrim.setAlpha(0f);
         adapter.reload();
-        int saved = adapter.positionOf(getSharedPreferences("tvhome", MODE_PRIVATE)
+        int saved = adapter.positionOf(getSharedPreferences("cleanhome", MODE_PRIVATE)
                 .getString("last_focused", ""));
         if (saved >= 0) lastFocused = saved;
         grid.scheduleLayoutAnimation();
@@ -278,7 +278,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     @Override
     public void onTileFocused(int position, View card) {
         lastFocused = position;
-        getSharedPreferences("tvhome", MODE_PRIVATE).edit()
+        getSharedPreferences("cleanhome", MODE_PRIVATE).edit()
                 .putString("last_focused", adapter.pkgAt(position)).apply();
         if (adapter.isDocked(position)) {
             gridScrim.animate().alpha(0f).setDuration(220).start();
