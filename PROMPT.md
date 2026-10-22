@@ -41,6 +41,7 @@ Do not build or install the optional Clean Home launcher unless I choose it. If 
 
 - Read the README and use the repository's `build-and-install.sh` script.
 - Explain that it is an app, not a replacement OS, and Fire TV may continue opening Amazon Home when I press Home.
+- Explain that boot auto-launch is best effort and may be blocked by some Fire OS builds; test it on this model before claiming it works.
 - Do not set it as the default Home app unless the TV exposes a supported setting and I choose that option.
 - On Fire OS versions that do not support a third-party default launcher, explain how to open Clean Home from **Your Apps & Channels** or `open-clean-home.sh TV_IP`.
 - After installation, send remote D-pad input over ADB where supported, capture a screenshot from the TV, and inspect it before calling the install complete.
