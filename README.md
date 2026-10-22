@@ -36,7 +36,7 @@ If ADB reports `No route to host` on macOS even though the TV is reachable, macO
 
 ## Optional launcher source
 
-The launcher is optional and is not required to run the cleanup prompt. It provides a black, Apple TV inspired home screen with large app artwork, a dock, an app grid, and scenic wallpapers. The launcher requests a best-effort launch after a cold boot on Fire OS versions that allow boot receivers to open an activity. This is not a supported replacement for Amazon Home, does not cover wake-from-sleep on every model, and cannot be guaranteed across Fire OS releases. On the tested Fire OS 5 build, the Home button still returns to Amazon Home; reopen Clean Home through **Your Apps & Channels** or the ADB helper below.
+The launcher is optional and is not required to run the cleanup prompt. It provides a black, Apple TV inspired home screen with large app artwork, a dock, an app grid, and scenic wallpapers. We verified that it opens after a cold reboot on one AFTT Fire TV Stick running Fire OS 5.2.8.4. This is an app-level boot launch, not a replacement for Amazon Home: the remote's Home button still returns to Amazon Home. Wake-from-sleep behavior and other Fire OS versions have not been verified, so do not assume the same result across devices.
 
 The launcher source is adapted from [Gathin23/CleanYourTV](https://github.com/Gathin23/cleanyourtv), which is MIT licensed. This repository was created independently, so GitHub will not label it as a fork. The source attribution and original MIT notice are retained in [`LICENSE`](LICENSE). We changed the Android package ID to `com.theludiclabs.cleanhome` to give this build its own identity.
 
